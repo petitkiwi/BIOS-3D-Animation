@@ -179,7 +179,7 @@ seaurchinshell_loader.load('Models/seaurchinshell/scene.gltf', (gltf) => {
     // adjust scale (de quelle taille ça apparaît)
     model.scale.set(5, 5, 5);
 
-    // scene.add(model);
+    scene.add(model);
     // // GUI
     // model.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
     // gui.add(guiParams, 'positionX', -100, 100).onChange(updateParam);
