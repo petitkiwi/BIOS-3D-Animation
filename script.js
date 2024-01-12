@@ -119,6 +119,10 @@ BIOS_loader.load('Models/bios.gltf', (gltf) => {
     scene.add(model);
 });
 
+// not displaying the page before the statue is loaded (kinda cheating - bc the statue is the slowest element to load)
+const loading = document.getElementById("loading");
+let loaded = false;
+
 //statue pâques
 const statue_loader = new GLTFLoader();
 statue_loader.load('Models/statue/scene.gltf', (gltf) => {
@@ -133,6 +137,8 @@ statue_loader.load('Models/statue/scene.gltf', (gltf) => {
 
     scene.add(statue);
     scene.add(welcomemesh); // so the text box doesn't appear before it's speaker
+    loading.style.visibility = "hidden";
+    loaded = true;
 });
 
 const nakedguy_loader = new GLTFLoader();
@@ -169,7 +175,6 @@ addPalmTree(new THREE.Vector3(50, 0, 50), 'Models/date_palm/scene.gltf');
 addPalmTree(new THREE.Vector3(-100, 0, 92), 'Models/date_palm/scene.gltf');
 addPalmTree(new THREE.Vector3(80, 0, 300), 'Models/date_palm/scene.gltf');
 addPalmTree(new THREE.Vector3(85, 0, -100), 'Models/date_palm/scene.gltf');
-
 
 // sea urchin shell
 const seaurchinshell_loader = new GLTFLoader();
@@ -392,6 +397,7 @@ composer.addPass(outputPass);
 const animate = () => {
     // Call animate recursively
     requestAnimationFrame(animate);
+    if (loaded){ // after all elements are loaded
 
     // Rotate the models group around the center of the ground plane
     skating_teemo.rotation.y += 0.008; // rotation speed
@@ -406,7 +412,7 @@ const animate = () => {
     composer.render();
 
     //console.log("Camera Position:", camera.position.x, camera.position.y, camera.position.z);
-
     }
+}
     // Call animate for the first time
-    animate();
+animate();
