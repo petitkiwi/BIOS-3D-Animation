@@ -87,17 +87,16 @@ const ambient = new THREE.AmbientLight(0xffffff);
 scene.add(ambient);
 
 // HELPERS
-const axesHelper = new THREE.AxesHelper(50);
-scene.add(axesHelper);
+// const axesHelper = new THREE.AxesHelper(50);
+// scene.add(axesHelper);
 
 // GUI
 const gui = new GUI();
 // Object to hold parameters for dat.GUI
 const guiParams = {
-    positionX: 0,
-    positionY: 0,
-    positionZ: 0,
-    //scaleXYZ: 1
+    positionX: 16.4,
+    positionY: 6.6,
+    positionZ: -25.4,
 };
 
 
@@ -191,16 +190,7 @@ seaurchin_loader.load('Models/seaurchin/scene.gltf', (gltf) => {
 
     scene.add(model);
 
-    // // GUI
-    // model.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
-    // //model.scale.set(guiParams.scaleXYZ);
-    // gui.add(guiParams, 'positionX', -100, 100).onChange(updateParam);
-    // gui.add(guiParams, 'positionY', -100, 100).onChange(updateParam);
-    // gui.add(guiParams, 'positionZ', -100, 100).onChange(updateParam);
-    // //gui.add(guiParams, 'scaleXYZ', 0, 50).onChange(updateParam);
-    // function updateParam() {
-    //     model.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
-    // }
+    
 });
 
 // GROUP MODELS
@@ -274,9 +264,17 @@ const urchintext = urchintext_loader.load('Images/urchintext.png');
 const geourchintext = new THREE.PlaneGeometry(200, 200); // Adjust the size as needed
 const maturchintext = new THREE.MeshStandardMaterial({ map: urchintext, transparent: true, side: THREE.DoubleSide });
 const urchinmesh = new THREE.Mesh(geourchintext, maturchintext);
-urchinmesh.rotation.set(-0.5,1,0.2)
+urchinmesh.rotation.set(0,Math.PI,0)
 urchinmesh.scale.set(0.08, 0.08, 0.08)
-urchinmesh.position.set(-10, 15, 29)
+urchinmesh.position.set(21, 8, -20)
+// GUI
+// urchinmesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
+// gui.add(guiParams, 'positionX', -100, 100).onChange(updateParam);
+// gui.add(guiParams, 'positionY', -100, 100).onChange(updateParam);
+// gui.add(guiParams, 'positionZ', -100, 100).onChange(updateParam);
+// function updateParam() {
+//     urchinmesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
+// }
 
 // naked_guy tattoo
 const thomas_loader = new THREE.TextureLoader(); // un seul loader pour several textures
@@ -341,9 +339,11 @@ function onClick(event) {
         console.log("clicked");
 
         // Set the new camera position (adjust the values as needed)
-        newCameraPosition = new THREE.Vector3(18.6,13.1,-42);
+        newCameraPosition = new THREE.Vector3(10,13.1,-42);
+        scene.remove(biosmesh);
         getCloser();
         controls.target.set(0, 0, 0); // Set the focus point of the controls
+        scene.add(urchinmesh);
     }
     }   
 }
