@@ -267,25 +267,35 @@ const urchinmesh = new THREE.Mesh(geourchintext, maturchintext);
 urchinmesh.rotation.set(0,Math.PI,0)
 urchinmesh.scale.set(0.08, 0.08, 0.08)
 urchinmesh.position.set(21, 8, -20)
+
+// hi text box
+const hitext_loader = new THREE.TextureLoader(); // un seul loader pour several textures
+const hitext = urchintext_loader.load('Images/hitext.png');
+const geohitext = new THREE.PlaneGeometry(200, 200); // Adjust the size as needed
+const mathitext = new THREE.MeshStandardMaterial({ map: hitext, transparent: true, side: THREE.DoubleSide });
+const himesh = new THREE.Mesh(geohitext, mathitext);
+himesh.rotation.set(0,0,0)
+himesh.scale.set(0.08, 0.08, 0.08)
+himesh.position.set(-45, 15, 50)
 // GUI
-// urchinmesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
+// himesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
 // gui.add(guiParams, 'positionX', -100, 100).onChange(updateParam);
 // gui.add(guiParams, 'positionY', -100, 100).onChange(updateParam);
 // gui.add(guiParams, 'positionZ', -100, 100).onChange(updateParam);
 // function updateParam() {
-//     urchinmesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
+//     himesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
 // }
 
 // naked_guy tattoo
-const thomas_loader = new THREE.TextureLoader(); // un seul loader pour several textures
-const thomastext = thomas_loader.load('Images/thomas.png');
-const geothomastext = new THREE.PlaneGeometry(200, 200); // Adjust the size as needed
-const matthomastext = new THREE.MeshStandardMaterial({ map: thomastext, transparent: true, side: THREE.DoubleSide });
-const thomasmesh = new THREE.Mesh(geothomastext, matthomastext);
-thomasmesh.rotation.set(-0.45,0,0)
-thomasmesh.scale.set(0.02,0.02,0.02)
-thomasmesh.position.set(1.2,14.9,0.9)
-scene.add(thomasmesh);
+const tattoo_loader = new THREE.TextureLoader(); // un seul loader pour several textures
+const tattootext = tattoo_loader.load('Images/tattoo.png');
+const geotattootext = new THREE.PlaneGeometry(200, 200); // Adjust the size as needed
+const mattattootext = new THREE.MeshStandardMaterial({ map: tattootext, transparent: true, side: THREE.DoubleSide });
+const tattoomesh = new THREE.Mesh(geotattootext, mattattootext);
+tattoomesh.rotation.set(-0.45,0,0)
+tattoomesh.scale.set(0.02,0.02,0.02)
+tattoomesh.position.set(1.2,14.9,0.9)
+scene.add(tattoomesh);
 
 
 // INTERACTION
@@ -350,8 +360,10 @@ function onClick(event) {
             console.log("clicked urchin");
             scene.remove(urchinmesh);
             // Open a link when biosmesh is clicked
-            //window.location.href = 'https://dvic.devinci.fr/member/claire-lefez';
-            window.open('https://dvic.devinci.fr/member/claire-lefez', '_blank');
+            //window.location.href = 'https://dvic.devinci.fr/member/claire-lefez'; // open link same tab
+            window.open('https://dvic.devinci.fr/member/claire-lefez', '_blank'); // open link new tab
+            newCameraPosition = new THREE.Vector3(-30, 20, 100);
+            scene.add(himesh);
         }   
     }
 }
