@@ -9,6 +9,9 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 //import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
 
 // Create a scene
@@ -365,6 +368,17 @@ function onClick(event) {
 window.addEventListener("pointerdown", onClick);
 
 
+// POST PROCESSING EFFECTS
+
+const composer = new EffectComposer(renderer);
+const renderPass = new RenderPass(scene, camera);
+composer.addPass(renderPass);
+
+const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.5, 0.2, 1);
+// (strength of the bloom effect, threshold intensity for bright areas, radius of the bloom effect)
+composer.addPass(bloomPass);
+
+
 // ANIMATION LOOP
 
 // next time écran est rafraichi, navigateur rappelle la fonction
@@ -380,6 +394,9 @@ const animate = () => {
 
     // Render the scene
     renderer.render(scene, camera);
+
+    // Render the scene
+    composer.render();
 
     //console.log("Camera Position:", camera.position.x, camera.position.y, camera.position.z);
 
