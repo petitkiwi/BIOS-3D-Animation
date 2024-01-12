@@ -161,14 +161,11 @@ addPalmTree(new THREE.Vector3(100, 0, 30), 'Models/coconut_palm/scene.gltf');
 addPalmTree(new THREE.Vector3(-100, 0, -60),  'Models/coconut_palm/scene.gltf');
 addPalmTree(new THREE.Vector3(-250, 0, 10), 'Models/coconut_palm/scene.gltf');
 addPalmTree(new THREE.Vector3(-25, 0, 10), 'Models/date_palm/scene.gltf');
-// GUI
-// himesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
-// gui.add(guiParams, 'positionX', -100, 100).onChange(updateParam);
-// gui.add(guiParams, 'positionY', -100, 100).onChange(updateParam);
-// gui.add(guiParams, 'positionZ', -100, 100).onChange(updateParam);
-// function updateParam() {
-//     himesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
-// }
+addPalmTree(new THREE.Vector3(50, 0, 50), 'Models/date_palm/scene.gltf');
+addPalmTree(new THREE.Vector3(-100, 0, 92), 'Models/date_palm/scene.gltf');
+addPalmTree(new THREE.Vector3(80, 0, 300), 'Models/date_palm/scene.gltf');
+addPalmTree(new THREE.Vector3(85, 0, -100), 'Models/date_palm/scene.gltf');
+
 
 // sea urchin shell
 const seaurchinshell_loader = new GLTFLoader();
@@ -182,7 +179,15 @@ seaurchinshell_loader.load('Models/seaurchinshell/scene.gltf', (gltf) => {
     // adjust scale (de quelle taille ça apparaît)
     model.scale.set(5, 5, 5);
 
-    scene.add(model);
+    // scene.add(model);
+    // // GUI
+    // model.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
+    // gui.add(guiParams, 'positionX', -100, 100).onChange(updateParam);
+    // gui.add(guiParams, 'positionY', -100, 100).onChange(updateParam);
+    // gui.add(guiParams, 'positionZ', -100, 100).onChange(updateParam);
+    // function updateParam() {
+    //     model.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
+    // }
 });
 
 // sea urchin (alive lol)
@@ -373,13 +378,10 @@ const animate = () => {
     // Update the controls
     controls.update();
 
-    // Update shader time uniform
-    shaderMaterial.uniforms.time.value += 0.01;
-
     // Render the scene
     renderer.render(scene, camera);
 
-    console.log("Camera Position:", camera.position.x, camera.position.y, camera.position.z);
+    //console.log("Camera Position:", camera.position.x, camera.position.y, camera.position.z);
 
     }
     // Call animate for the first time
