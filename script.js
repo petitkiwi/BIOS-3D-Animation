@@ -148,18 +148,26 @@ nakedguy_loader.load('Models/naked_guy/scene.gltf', (gltf) => {
 });
 
 const palm_loader = new GLTFLoader();
-palm_loader.load('Models/coconut_palm/scene.gltf', (gltf) => {
-    // Le modèle 3D est chargé ici
-    const model = gltf.scene;
-    // model position according to xyz
-    model.position.set(30, 0, 0);
-    // adjust model roation (radians)
-    model.rotation.set(0, 0, 0); // Exemple : rotation de 90 degrés autour de l'axe y
-    // adjust scale (de quelle taille ça apparaît)
-    model.scale.set(10, 10, 10);
-
-    scene.add(model);
-});
+// add multiple palm trees to the scene
+function addPalmTree(position) {
+    palm_loader.load('Models/coconut_palm/scene.gltf', (gltf) => {
+        const model = gltf.scene;
+        model.position.copy(position); // Set the position based on the provided argument
+        model.rotation.set(0, 0, 0);
+        model.scale.set(10, 10, 10);
+        scene.add(model);
+    });
+}
+addPalmTree(new THREE.Vector3(30, 0, 0));
+addPalmTree(new THREE.Vector3(100, 0, 30));
+// GUI
+// himesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
+// gui.add(guiParams, 'positionX', -100, 100).onChange(updateParam);
+// gui.add(guiParams, 'positionY', -100, 100).onChange(updateParam);
+// gui.add(guiParams, 'positionZ', -100, 100).onChange(updateParam);
+// function updateParam() {
+//     himesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
+// }
 
 // sea urchin shell
 const seaurchinshell_loader = new GLTFLoader();
@@ -225,19 +233,6 @@ scene.add(skating_teemo);
 
 // TEXT
 
-/* document.addEventListener('DOMContentLoaded', () => {
-    const dialogContainer = document.getElementById('dialogContainer');
-    const dialogText = document.getElementById('dialogText');
-    // Modifier le texte ici selon vos besoins
-    dialogText.innerText = "Welcome to the BIOS Animation!";
-    // Afficher le conteneur
-    dialogContainer.style.display = 'block';
-    // Masquer le conteneur après 3 secondes (3000 millisecondes)
-    setTimeout(() => {
-        dialogContainer.style.display = 'none';
-    }, 5000);
-}); */
-
 // welcome text box
 const welcometext_loader = new THREE.TextureLoader(); // un seul loader pour several textures
 const welcometext = welcometext_loader.load('Images/welcometext.png');
@@ -277,14 +272,6 @@ const himesh = new THREE.Mesh(geohitext, mathitext);
 himesh.rotation.set(0,0,0)
 himesh.scale.set(0.08, 0.08, 0.08)
 himesh.position.set(-45, 15, 50)
-// GUI
-// himesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
-// gui.add(guiParams, 'positionX', -100, 100).onChange(updateParam);
-// gui.add(guiParams, 'positionY', -100, 100).onChange(updateParam);
-// gui.add(guiParams, 'positionZ', -100, 100).onChange(updateParam);
-// function updateParam() {
-//     himesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
-// }
 
 // naked_guy tattoo
 const tattoo_loader = new THREE.TextureLoader(); // un seul loader pour several textures
@@ -359,10 +346,12 @@ function onClick(event) {
             // ZOOM 3
             console.log("clicked urchin");
             scene.remove(urchinmesh);
+            //window.dispatchEvent(new Event('pointerup'));
             // Open a link when biosmesh is clicked
             //window.location.href = 'https://dvic.devinci.fr/member/claire-lefez'; // open link same tab
             window.open('https://dvic.devinci.fr/member/claire-lefez', '_blank'); // open link new tab
-            newCameraPosition = new THREE.Vector3(-30, 20, 100);
+            controls.reset();
+            camera.position.set(-30, 20, 100);
             scene.add(himesh);
         }   
     }
