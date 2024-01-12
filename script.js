@@ -38,7 +38,7 @@ window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     // Update the controls
-    controls.handleResize();
+    //controls.handleResize();
     // Update the renderer
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -319,33 +319,41 @@ function onClick(event) {
     // ZOOM 1 
     // rayon d'intéraction autour de l'objet cliqué
     const welcome_intersect = raycaster.intersectObject(welcomemesh, true);
+    const bios_intersect = raycaster.intersectObject(biosmesh, true);
+    const urchin_intersect = raycaster.intersectObject(urchinmesh, true);
 
     if (welcome_intersect.length > 0) {
-        console.log("clicked");
-
-        // Set the new camera position (adjust the values as needed)
+        console.log("clicked welcome");
+        // Set the new camera position
         newCameraPosition = new THREE.Vector3(22, 24, 35);
         scene.remove(welcomemesh);
         getCloser();
         controls.target.set(0, 0, 0); // Set the focus point of the controls
         scene.add(biosmesh);
     }
-    else
+    else if(bios_intersect.length > 0)
     {
-        // ZOOM 2
-    const bios_intersect = raycaster.intersectObject(biosmesh, true);
-
-    if (bios_intersect.length > 0) {
-        console.log("clicked");
-
-        // Set the new camera position (adjust the values as needed)
+        // ZOOM 2     
+        console.log("clicked bios");
+        // Set the new camera position
         newCameraPosition = new THREE.Vector3(10,13.1,-42);
         scene.remove(biosmesh);
         getCloser();
         controls.target.set(0, 0, 0); // Set the focus point of the controls
         scene.add(urchinmesh);
-    }
     }   
+    else 
+    {
+        if(urchin_intersect.length > 0)
+        {
+            // ZOOM 3
+            console.log("clicked urchin");
+            scene.remove(urchinmesh);
+            // Open a link when biosmesh is clicked
+            //window.location.href = 'https://dvic.devinci.fr/member/claire-lefez';
+            window.open('https://dvic.devinci.fr/member/claire-lefez', '_blank');
+        }   
+    }
 }
 window.addEventListener("pointerdown", onClick);
 
