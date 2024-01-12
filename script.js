@@ -8,7 +8,7 @@ en JS, pas besoin de préciser le type de la variable
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+//import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 
 
 // Create a scene
@@ -81,8 +81,6 @@ scene.fog = new THREE.FogExp2(fogColor, fogDensity);
 const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x404040, 2);
 // (color of upper hemisphere [sky], color of lower hemisphere [ground], intensity)
 scene.add(hemisphereLight);
-
-
 const ambient = new THREE.AmbientLight(0xffffff);
 scene.add(ambient);
 
@@ -91,13 +89,13 @@ scene.add(ambient);
 // scene.add(axesHelper);
 
 // GUI
-const gui = new GUI();
-// Object to hold parameters for dat.GUI
-const guiParams = {
-    positionX: 16.4,
-    positionY: 6.6,
-    positionZ: -25.4,
-};
+// const gui = new GUI();
+// // Object to hold parameters for dat.GUI
+// const guiParams = {
+//     positionX: 16.4,
+//     positionY: 6.6,
+//     positionZ: -25.4,
+// };
 
 
 // GLTF MODELS
@@ -149,8 +147,8 @@ nakedguy_loader.load('Models/naked_guy/scene.gltf', (gltf) => {
 
 const palm_loader = new GLTFLoader();
 // add multiple palm trees to the scene
-function addPalmTree(position) {
-    palm_loader.load('Models/coconut_palm/scene.gltf', (gltf) => {
+function addPalmTree(position, file) {
+    palm_loader.load(file, (gltf) => {
         const model = gltf.scene;
         model.position.copy(position); // Set the position based on the provided argument
         model.rotation.set(0, 0, 0);
@@ -158,8 +156,11 @@ function addPalmTree(position) {
         scene.add(model);
     });
 }
-addPalmTree(new THREE.Vector3(30, 0, 0));
-addPalmTree(new THREE.Vector3(100, 0, 30));
+addPalmTree(new THREE.Vector3(30, 0, 0), 'Models/coconut_palm/scene.gltf');
+addPalmTree(new THREE.Vector3(100, 0, 30), 'Models/coconut_palm/scene.gltf');
+addPalmTree(new THREE.Vector3(-100, 0, -60),  'Models/coconut_palm/scene.gltf');
+addPalmTree(new THREE.Vector3(-250, 0, 10), 'Models/coconut_palm/scene.gltf');
+addPalmTree(new THREE.Vector3(-25, 0, 10), 'Models/date_palm/scene.gltf');
 // GUI
 // himesh.position.set(guiParams.positionX, guiParams.positionY, guiParams.positionZ);
 // gui.add(guiParams, 'positionX', -100, 100).onChange(updateParam);
@@ -367,10 +368,14 @@ const animate = () => {
     requestAnimationFrame(animate);
 
     // Rotate the models group around the center of the ground plane
-    skating_teemo.rotation.y += 0.006; // rotation speed
+    skating_teemo.rotation.y += 0.008; // rotation speed
 
     // Update the controls
     controls.update();
+
+    // Update shader time uniform
+    shaderMaterial.uniforms.time.value += 0.01;
+
     // Render the scene
     renderer.render(scene, camera);
 

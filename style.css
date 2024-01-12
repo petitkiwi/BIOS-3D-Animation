@@ -9,23 +9,3 @@ head, body {
 canvas {
     display: block;
 }
-
-#dialogContainer {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-}
-
-#dialogBox {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-#dialogText {
-    margin: 0;
-}
