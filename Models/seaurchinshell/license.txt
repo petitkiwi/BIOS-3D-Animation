@@ -1,0 +1,8 @@
+Model Information:
+* title:	Echinoid: Strongylocentrotus (PRI 78783)
+* source:	https://sketchfab.com/3d-models/echinoid-strongylocentrotus-pri-78783-ff7eca213f1b4afcb22ec5457f244c1b
+* author:	Digital Atlas of Ancient Life (https://sketchfab.com/DigitalAtlasOfAncientLife)
+
+Model License:
+* license type:	CC0-1.0 (http://creativecommons.org/publicdomain/zero/1.0/)
+* requirements:	Credit is not mandatory. Commercial use is allowed.

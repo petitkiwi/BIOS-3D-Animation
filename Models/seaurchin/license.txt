@@ -1,0 +1,11 @@
+Model Information:
+* title:	Red Sea Urchin Small
+* source:	https://sketchfab.com/3d-models/red-sea-urchin-small-2adc33a3a8c74a3c8759745c46c612ff
+* author:	ADamAReese (https://sketchfab.com/ADamAReese)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Red Sea Urchin Small" (https://sketchfab.com/3d-models/red-sea-urchin-small-2adc33a3a8c74a3c8759745c46c612ff) by ADamAReese (https://sketchfab.com/ADamAReese) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

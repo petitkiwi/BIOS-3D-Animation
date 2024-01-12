@@ -1,0 +1,11 @@
+Model Information:
+* title:	Teemo
+* source:	https://sketchfab.com/3d-models/teemo-ecdab98a845244ac8ed8849d04050ffb
+* author:	Theannemine (https://sketchfab.com/Theannemine)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Teemo" (https://sketchfab.com/3d-models/teemo-ecdab98a845244ac8ed8849d04050ffb) by Theannemine (https://sketchfab.com/Theannemine) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
