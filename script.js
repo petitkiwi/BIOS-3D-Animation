@@ -12,6 +12,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 
 // Create a scene
@@ -372,11 +373,17 @@ window.addEventListener("pointerdown", onClick);
 
 const composer = new EffectComposer(renderer);
 const renderPass = new RenderPass(scene, camera);
-composer.addPass(renderPass);
+const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    0.1, // strength of the bloom effect
+    0.1, // threshold intensity for bright areas
+    1 // radius of the bloom effect
+);
+const outputPass = new OutputPass();
 
-const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.5, 0.2, 1);
-// (strength of the bloom effect, threshold intensity for bright areas, radius of the bloom effect)
+composer.addPass(renderPass);
 composer.addPass(bloomPass);
+composer.addPass(outputPass);
 
 
 // ANIMATION LOOP
@@ -393,7 +400,7 @@ const animate = () => {
     controls.update();
 
     // Render the scene
-    renderer.render(scene, camera);
+    //renderer.render(scene, camera);
 
     // Render the scene
     composer.render();
